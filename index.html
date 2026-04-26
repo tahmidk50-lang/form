@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Student</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">Student Manager</a>
+
+    <div>
+      <a href="index.html" class="btn btn-primary me-2">Add Student</a>
+      <a href="view.html" class="btn btn-success">View Students</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Form -->
+<div class="container mt-4">
+    <h2>Add Student</h2>
+
+    <input type="text" id="key" class="form-control mb-2" placeholder="Storage Key">
+    <input type="text" id="id" class="form-control mb-2" placeholder="Student ID">
+    <input type="text" id="name" class="form-control mb-2" placeholder="Name">
+    <input type="email" id="email" class="form-control mb-2" placeholder="Email">
+    <input type="text" id="phone" class="form-control mb-2" placeholder="Phone">
+    <input type="text" id="course" class="form-control mb-2" placeholder="Course">
+
+    <button class="btn btn-primary" onclick="addStudent()">Add Student</button>
+</div>
+
+<script>
+function addStudent() {
+
+    let key = document.getElementById("key").value;
+
+    let student = {
+        id: document.getElementById("id").value,
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        course: document.getElementById("course").value
+    };
+
+    // Get existing data
+    let data = localStorage.getItem(key);
+
+    if (data == null) {
+        let arr = [];
+        arr.push(student);
+        localStorage.setItem(key, JSON.stringify(arr));
+    } else {
+        let arr = JSON.parse(data);
+        arr.push(student);
+        localStorage.setItem(key, JSON.stringify(arr));
+    }
+
+    alert("Student Added!");
+
+    // Clear fields
+    document.getElementById("key").value = "";
+    document.getElementById("id").value = "";
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("course").value = "";
+}
+</script>
+
+</body>
+</html>
